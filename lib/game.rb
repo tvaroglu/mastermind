@@ -49,16 +49,20 @@ class Game
     user_input = $stdin.gets.chomp
     if user_input == 'p'.downcase
       print_start
+      # call game.run (not yet created)
     elsif user_input == 'i'.downcase
       print_instructions
       user_input = $stdin.gets.chomp
       self.start
     elsif user_input == 'q'.downcase
-      abort "Game exiting... \n goodbye!"
+      abort "Game exiting... \n Goodbye!"
     else
-      puts "Error, invalid input."
       self.start
     end
   end
 
 end
+
+
+g = Game.new
+g.start

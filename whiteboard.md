@@ -1,6 +1,6 @@
 ### MASTERMIND
 
-#### High-level project plan:
+#### Git Workflow & Implementation Process:
 
 1. Build all project requirements locally, test, run, and initiate final Pull Request so both partners have the final version within local repos.
 2. Move final main branch to Replit interface
@@ -33,3 +33,22 @@
         $ git status
         $ git pull origin testing
         ```
+
+#### Project Planning / Blue-Print
+
+1. 2 classes:
+  - Game
+    - Greet
+    - Instructions
+    - Start
+      - Sequence.new()
+      - If user input (guess) == combo
+        - End
+      - Else
+        - Continue (loop)
+  - Sequence
+    - Combination of 4 colors created here
+  - Guess (user input)
+    - Initialize (gets.chomp?)
+    - Is correct? (true vs false)
+  - Player? (for one vs two player mode?)

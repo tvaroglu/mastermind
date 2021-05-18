@@ -37,6 +37,8 @@
 #### Project Planning / Blue-Print
 
 1. 2 classes:
+  - [x] Sequence
+    - Combination of 4 colors created here
   - Game
     - Greet
     - Instructions
@@ -46,8 +48,6 @@
         - End
       - Else
         - Continue (loop)
-  - Sequence
-    - Combination of 4 colors created here
   - Guess (user input)
     - Initialize (gets.chomp?)
     - Is correct? (true vs false)

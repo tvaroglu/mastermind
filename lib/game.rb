@@ -14,7 +14,7 @@ class Game
       'Colors can repeat, and every color does not have to be used.',
       'Good luck!',
       '-'*30,
-      'Type any key to continue.',
+      'Type any key and press "Enter" to continue.',
       ' >'
     ]
     @start_message = [

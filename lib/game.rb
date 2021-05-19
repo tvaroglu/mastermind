@@ -1,3 +1,5 @@
+require_relative 'combo'
+
 class Game
 
   def initialize
@@ -47,10 +49,13 @@ class Game
 
   def start
     print_welcome
+    
     user_input = $stdin.gets.chomp
+    winning_combo = Combo.new.mixer
+
     if user_input == 'p'.downcase
       print_start
-      # call game.run (not yet created)
+      # link in guessing stuff
     elsif user_input == 'i'.downcase
       print_instructions
       user_input = $stdin.gets.chomp
@@ -61,5 +66,7 @@ class Game
       self.start
     end
   end
-
 end
+
+game = Game.new
+p game.start

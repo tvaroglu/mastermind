@@ -23,7 +23,8 @@ class Game
       "Use (q)uit at any time to end the game.",
       "What's your guess?"
     ]
-    @end_message = ''
+    @end_message = [''
+    ]
   end
 
   def print_welcome
@@ -62,7 +63,3 @@ class Game
   end
 
 end
-
-
-g = Game.new
-g.start

@@ -15,7 +15,7 @@ Use this template when conducting DTR with your project partners.
 * How would you describe your work style?
   - Working ahead is the team goal.
   - Schedules generally align (adjusted for time zone); best work time is after dinner.  Critical to maintain transparency in adjustment of schedule (+/-) as needed
-  - Initial POM break cadence target:  50 on / 10 off?
+  - Initial POM break cadence target:  40 on / ~5-10 off.?
 * What are each of our strengths? How can our strengths complement each other?
   - Taylor:  Technical knowledge and prior programming experience.
   - Caroline:  Very hard working, eager to learn and understand.  Great resource to de-stress!
@@ -65,7 +65,7 @@ Any additional questions that you would like to add:
   - Slack is number 1 for quick communication; meetings coordinated over Google Calendar and Zoom.
   - Alternative wifi available, in the event someone goes dark.
 * Pomodoro breaks are especially important for remote work and doubly so for quarantine. What should our Pom cadence look like? How will hold ourselves accountable?
-  - Initial proposal:  50 on / 10 off.
+  - Initial proposal:  40 on / ~5-10 off.
 * Quarantine is tough, so it’s important to make note of our mental/emotional state when working with others. How can we make space to check in on each other’s well being, in addition to the work that needs to be done?
   - 5 minute check in at the beginning of a work session, for a temperature check.
   - Be open and honest if a break is needed (especially for snacks!!)
@@ -92,7 +92,7 @@ Workload Expectations (What features do we each want to work on?):  N/A - dragon
 
 Workflow Expectations (Git workflow/Tools/Code Review/Reviewing Pull Requests/Debugging and Problem-solving Techniques):  Commit early and often, to ensure work is not lost; separate branches for each dragon, to make pull requests and project integration simple to track.
 
-Pomodoro Break Schedule:  50 on / 10 off (to start)
+Pomodoro Break Schedule:  40 on / ~5-10 off. (to start)
 
 Expectations for giving and receiving feedback:  Early and often - full transparency is key.
 

@@ -29,9 +29,21 @@ class Game
       "What's your guess?",
       ' >'
     ]
-    @end_message = [''
-    ]
+    @guess_counter = 0
+    @elapsed_time = 0
+    @winning_sequence = ""
   end
+
+  def end_game
+    end_message = [
+      "Congratulations! You guessed the sequence '#{@winning_sequence}'",
+      "in #{@guess_counter} guesses over #{@elapsed_time}.",
+      'Do you want to (p)lay again or (q)uit?'
+    ]
+    #call play again
+    #call quit
+  end
+
 
   def print_welcome
     @welcome_message.each { |line| puts line }

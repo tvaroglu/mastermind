@@ -38,12 +38,12 @@ class Game
   def timer
     total_time = (@ending_time - @starting_time).to_f
     minutes = (total_time/60.to_f).floor
-    seconds = (total_time % 60).floor
+    seconds = (total_time % 60).round
     return "#{minutes} minute(s) #{seconds} second(s)"
   end
 
   def end_game
-    single_vs_plural = "guesses"
+    single_vs_plural = 'guesses'
     single_vs_plural = 'guess' if @guess_counter == 1
     @ending_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     end_message = [
@@ -84,7 +84,7 @@ class Game
       @starting_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       user_input = $stdin.gets.chomp
       self.run(Guess.new(Combo.new.mixer, user_input))
-      # self.run(Guess.new("yybr", user_input)) # for user testing
+      # self.run(Guess.new("yybr", user_input)) # stub for user testing
     elsif user_input == 'i'.downcase
       self.print_instructions
       user_input = $stdin.gets.chomp
@@ -98,7 +98,6 @@ class Game
 
   def try_again
     @guess_counter += 1
-
     if @guess_counter == 1
       return "You've taken #{@guess_counter} guess. \n >"
     else
@@ -127,6 +126,8 @@ class Game
   end
 
 end
+
+
 # for testing locally
 game = Game.new
 game.start

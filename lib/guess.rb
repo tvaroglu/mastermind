@@ -36,7 +36,9 @@ class Guess
 
     puts "'#{current_guess.upcase}' has #{correct_elems_count.keys.length} of the correct elements with #{correct_char_positions} in the correct positions"
   end
+
 end
+
 
 # winning_combo = 'yrbg'
 # user_guess = 'yrbg'

@@ -25,13 +25,42 @@ RSpec.describe Guess do
   end
 
   it "evaluates user input" do
+    puts "\n"
     stubbed_combo = "ggyb"
-    user_input = "bbyb"
 
+    user_input = "c"
     guess = Guess.new(stubbed_combo, user_input)
+    print_cheat = guess.evaluate_user_input(stubbed_combo, user_input)
 
-    # p guess.evaluate_user_input(stubbed_combo, user_input)
-    # expect(guess.evaluate_user_input(stubbed_combo, user_input).to_s).to be_a(String)
-    expect(guess.evaluate_user_input(stubbed_combo, user_input)).to include("y")
+    p print_cheat
+    puts '~'*50
+
+    user_input = "bby"
+    guess = Guess.new(stubbed_combo, user_input)
+    too_short = guess.evaluate_user_input(stubbed_combo, user_input)
+
+    p too_short
+    puts '~'*50
+
+    user_input = "bbybb"
+    guess = Guess.new(stubbed_combo, user_input)
+    too_long = guess.evaluate_user_input(stubbed_combo, user_input)
+
+    p too_long
+    puts '~'*50
+
+    user_input = "bbyb"
+    guess = Guess.new(stubbed_combo, user_input)
+    correct_length = guess.evaluate_user_input(stubbed_combo, user_input)
+
+    p correct_length
+    puts '~'*50
+
+    user_input = "ggyb"
+    guess = Guess.new(stubbed_combo, user_input)
+    correct_guess = guess.evaluate_user_input(stubbed_combo, user_input)
+
+    p correct_length
+    puts "\n"
   end
 end

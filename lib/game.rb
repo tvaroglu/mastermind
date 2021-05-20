@@ -10,6 +10,7 @@ class Game
       ' >'
     ]
     @instructions = [
+      ## initialize method will need to be modified for other difficulty levels
       'You will be presented with a sequence of four elements (colors).',
       'There are four possible colors (red, green, blue, and yellow).',
       'Each color is represented by the first letter (i.e. "r" = "red").',
@@ -21,6 +22,7 @@ class Game
       ' >'
     ]
     @start_message = [
+      ## initialize method will need to be modified for other difficulty levels
       "I have generated a beginner sequence with four elements made up of:",
       "(r)ed, (g)reen, (b)lue, and (y)ellow.",
       "Use (q)uit at any time to end the game.",
@@ -32,21 +34,15 @@ class Game
   end
 
   def print_welcome
-    @welcome_message.each do |line|
-      puts line
-    end
+    @welcome_message.each { |line| puts line }
   end
 
   def print_start
-    @start_message.each do |line|
-      puts line
-    end
+    @start_message.each { |line| puts line }
   end
 
   def print_instructions
-    @instructions.each do |line|
-      puts line
-    end
+    @instructions.each { |line| puts line }
   end
 
   def start
@@ -55,7 +51,7 @@ class Game
     if user_input == 'p'.downcase
       self.print_start
       user_input = $stdin.gets.chomp
-      self.run(Combo.new.mixer, user_input)
+      self.run(Guess.new(Combo.new.mixer, user_input))
     elsif user_input == 'i'.downcase
       self.print_instructions
       user_input = $stdin.gets.chomp
@@ -67,9 +63,11 @@ class Game
     end
   end
 
-  def run(new_combo, user_guess)
+  def run(first_guess)
+    combo_to_guess = first_guess.combo_to_guess
+    user_guess = first_guess.user_guess
     # stub
-    puts "You are trying to guess '#{new_combo}', and instead you guessed '#{user_guess}'"
+    puts "You are trying to guess '#{combo_to_guess}', and you guessed '#{user_guess}'"
   end
 
 end

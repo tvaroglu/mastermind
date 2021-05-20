@@ -11,38 +11,36 @@ class Guess
     @guess_array = @user_guess.split('')
   end
 
+  def is_correct?
+    return @combo_to_guess == @user_guess
+  end
+
   def evaluate_user_input(combo_to_guess, current_guess)
-    if current_guess.downcase == 'q'
+    if current_guess.downcase == 'q' # do we need to test?
     	abort "Game exiting... \n Goodbye!"
     elsif current_guess.downcase == 'c'
-      puts combo_to_guess
+      return combo_to_guess
     elsif current_guess.length < combo_to_guess.length
-      puts 'Guess is too short. Try again!'
+      return 'Guess is too short. Try again!'
     elsif current_guess.length > combo_to_guess.length
-      puts 'Guess is too long. Try again!'
+      return 'Guess is too long. Try again!'
     else
     	return self.evaluate_user_guess(combo_to_guess, current_guess)
     end
   end
 
   def evaluate_user_guess(combo_to_guess, current_guess)
-    correct_char_positions = 0
-    correct_elems_count = Hash.new
+    if self.is_correct? == false
 
-    @guess_array.each_with_index do |char, index|
-      correct_char_positions += 1 if @guess_array[index] == @combo_array[index]
-      correct_elems_count[char] = true if @combo_array.index(char) != nil
+      correct_char_positions = 0
+      correct_elems_count = Hash.new
+
+      @guess_array.each_with_index do |char, index|
+        correct_char_positions += 1 if @guess_array[index] == @combo_array[index]
+        correct_elems_count[char] = true if @combo_array.index(char) != nil
+      end
+
+      return "'#{current_guess.upcase}' has #{correct_elems_count.keys.length} of the correct elements with #{correct_char_positions} in the correct positions"
     end
-
-    puts "'#{current_guess.upcase}' has #{correct_elems_count.keys.length} of the correct elements with #{correct_char_positions} in the correct positions"
   end
-
 end
-
-
-# winning_combo = 'yrbg'
-# user_guess = 'yrbg'
-#
-# guess = Guess.new(winning_combo, user_guess)
-# # p guess
-# guess.evaluate_user_input(winning_combo, user_guess)

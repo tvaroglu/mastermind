@@ -16,7 +16,7 @@ class Guess
   end
 
   def evaluate_user_input(combo_to_guess, current_guess)
-    if current_guess.downcase == 'q' # do we need to test?
+    if current_guess.downcase == 'q' # possible to refactor via [str, bool] retval syntax, to maintain SRP
     	abort "Game exiting... \n Goodbye!"
     elsif current_guess.downcase == 'c'
       return combo_to_guess
@@ -43,4 +43,6 @@ class Guess
       return "'#{current_guess.upcase}' has #{correct_elems_count.keys.length} of the correct elements with #{correct_char_positions} in the correct positions"
     end
   end
+
+
 end

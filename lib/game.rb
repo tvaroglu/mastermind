@@ -10,7 +10,7 @@ class Game
       ' >'
     ]
     @instructions = [
-      ## initialize method will need to be modified for other difficulty levels
+      ## Note, initialize method will need to be refactored for other difficulty levels
       'You will be presented with a sequence of four elements (colors).',
       'There are four possible colors (red, green, blue, and yellow).',
       'Each color is represented by the first letter (i.e. "r" = "red").',
@@ -22,23 +22,24 @@ class Game
       ' >'
     ]
     @start_message = [
-      ## initialize method will need to be modified for other difficulty levels
-      "I have generated a beginner sequence with four elements made up of:",
-      "(r)ed, (g)reen, (b)lue, and (y)ellow.",
-      "Use (q)uit at any time to end the game.",
+      ## Note, initialize method will need to be refactored for other difficulty levels
+      'I have generated a beginner sequence with four elements made up of:',
+      '(r)ed, (g)reen, (b)lue, and (y)ellow.',
+      'Use (q)uit at any time to end the game.',
       "What's your guess?",
       ' >'
     ]
     @guess_counter = 0
     @elapsed_time = 0
-    @winning_sequence = ""
+    @winning_sequence = ''
   end
 
   def end_game
     end_message = [
       "Congratulations! You guessed the sequence '#{@winning_sequence}'",
       "in #{@guess_counter} guesses over #{@elapsed_time}.",
-      'Do you want to (p)lay again or (q)uit?'
+      'Do you want to (p)lay again or (q)uit?',
+      ' >'
     ]
     #call play again
     #call quit

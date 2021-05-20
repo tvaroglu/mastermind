@@ -4,7 +4,6 @@ require_relative '../lib/guess'
 
 RSpec.describe Guess do
   it "initializes" do
-
     user_input = "bbyy"
     guess = Guess.new(Combo.new.mixer, user_input)
 
@@ -24,43 +23,54 @@ RSpec.describe Guess do
     expect(guess.combo_array.length).to eq(4)
   end
 
-  it "evaluates user input" do
-    puts "\n"
-    stubbed_combo = "ggyb"
+  context "evaluate_user_input" do
+    before :each do
+      @stubbed_combo = "ggyb"
+    end
 
-    user_input = "c"
-    guess = Guess.new(stubbed_combo, user_input)
-    print_cheat = guess.evaluate_user_input(stubbed_combo, user_input)
+    it "returns the answer if you cheat" do
+      user_input = "c"
+      guess = Guess.new(@stubbed_combo, user_input)
 
-    p print_cheat
-    puts '~'*50
+      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq(@stubbed_combo)
+    end
 
-    user_input = "bby"
-    guess = Guess.new(stubbed_combo, user_input)
-    too_short = guess.evaluate_user_input(stubbed_combo, user_input)
+    it "has too short of a guess" do
+      user_input = "bby"
+      guess = Guess.new(@stubbed_combo, user_input)
 
-    p too_short
-    puts '~'*50
+      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq('Guess is too short. Try again!')
+    end
 
-    user_input = "bbybb"
-    guess = Guess.new(stubbed_combo, user_input)
-    too_long = guess.evaluate_user_input(stubbed_combo, user_input)
+    it "has too long of a guess" do
+      user_input = "bbybb"
+      guess = Guess.new(@stubbed_combo, user_input)
 
-    p too_long
-    puts '~'*50
+      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq('Guess is too long. Try again!')
+    end
 
-    user_input = "bbyb"
-    guess = Guess.new(stubbed_combo, user_input)
-    correct_length = guess.evaluate_user_input(stubbed_combo, user_input)
+    it "evaluates a guess if the guess length == answer length" do
+      user_input = "bbyb"
+      guess = Guess.new(@stubbed_combo, user_input)
 
-    p correct_length
-    puts '~'*50
+      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq("'BBYB' has 2 of the correct elements with 2 in the correct positions")
 
-    user_input = "ggyb"
-    guess = Guess.new(stubbed_combo, user_input)
-    correct_guess = guess.evaluate_user_input(stubbed_combo, user_input)
+      user_input = "gbyb"
+      guess = Guess.new(@stubbed_combo, user_input)
 
-    p correct_length
-    puts "\n"
+      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq("'GBYB' has 3 of the correct elements with 3 in the correct positions")
+    end
+
+    it "has a correct or incorrect guess" do
+      user_input = "ggyb"
+      guess = Guess.new(@stubbed_combo, user_input)
+
+      expect(guess.is_correct?).to eq(true)
+
+      user_input = "ygyb"
+      guess = Guess.new(@stubbed_combo, user_input)
+
+      expect(guess.is_correct?).to eq(false)
+    end
   end
 end

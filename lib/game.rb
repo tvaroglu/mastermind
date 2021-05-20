@@ -30,17 +30,25 @@ class Game
       ' >'
     ]
     @guess_counter = 0
-    @elapsed_time = 0
+    @starting_time = 0
+    @ending_time = 0
     @winning_sequence = ''
+  end
+
+  def timer
+    total_time = (@ending_time - @starting_time).to_f
+    minutes = (total_time/60.to_f).floor
+    seconds = (total_time % 60).floor
+    return "#{minutes} minute(s) #{seconds} second(s)"
   end
 
   def end_game
     single_vs_plural = "guesses"
     single_vs_plural = 'guess' if @guess_counter == 1
-
+    @ending_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     end_message = [
       "Congratulations! You guessed the sequence '#{@winning_sequence.upcase}'",
-      "in #{@guess_counter} #{single_vs_plural} over #{@elapsed_time}.",
+      "in #{@guess_counter} #{single_vs_plural} over #{self.timer} seconds.",
       'Do you want to (p)lay again or (q)uit?',
       ' >'
     ]
@@ -73,9 +81,10 @@ class Game
     user_input = $stdin.gets.chomp
     if user_input == 'p'.downcase
       self.print_start
+      @starting_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       user_input = $stdin.gets.chomp
-      # self.run(Guess.new(Combo.new.mixer, user_input))
-      self.run(Guess.new("yybr", user_input))
+      self.run(Guess.new(Combo.new.mixer, user_input))
+      # self.run(Guess.new("yybr", user_input)) # for user testing
     elsif user_input == 'i'.downcase
       self.print_instructions
       user_input = $stdin.gets.chomp
@@ -116,7 +125,8 @@ class Game
       self.end_game
     end
   end
-end
 
+end
+# for testing locally
 game = Game.new
 game.start

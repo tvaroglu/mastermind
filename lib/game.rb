@@ -41,10 +41,11 @@ class Game
       'Do you want to (p)lay again or (q)uit?',
       ' >'
     ]
+    end_message.each { |line| puts line }
+
     #call play again
     #call quit
   end
-
 
   def print_welcome
     @welcome_message.each { |line| puts line }
@@ -64,7 +65,8 @@ class Game
     if user_input == 'p'.downcase
       self.print_start
       user_input = $stdin.gets.chomp
-      self.run(Guess.new(Combo.new.mixer, user_input))
+      # self.run(Guess.new(Combo.new.mixer, user_input))
+      self.run(Guess.new("yybr", user_input))
     elsif user_input == 'i'.downcase
       self.print_instructions
       user_input = $stdin.gets.chomp
@@ -76,15 +78,31 @@ class Game
     end
   end
 
-  def run(first_guess)
-    combo_to_guess = first_guess.combo_to_guess
-    user_guess = first_guess.user_guess
-    # stub
-    puts "You are trying to guess '#{combo_to_guess}', and you guessed '#{user_guess}'"
+  def try_again
+    @guess_counter += 1
+    return "You've taken #{@guess_counter} guess"
   end
 
+  def run(first_guess)
+    @winning_sequence = first_guess.combo_to_guess
+    if first_guess.is_correct?
+      @guess_counter = 1
+      self.end_game
+    else
+      puts first_guess.evaluate_user_input(@winning_sequence, first_guess.user_guess)
+      puts self.try_again
+      next_guess = $stdin.gets.chomp
+      current_guess = Guess.new(@winning_sequence, next_guess)
+      until current_guess.user_guess == @winning_sequence
+        puts current_guess.evaluate_user_input(@winning_sequence, current_guess.user_guess)
+        puts self.try_again
+        next_guess = $stdin.gets.chomp
+        current_guess = Guess.new(@winning_sequence, next_guess)
+      end
+      self.end_game
+    end
+  end
 end
 
-
-# game = Game.new
-# game.start
+game = Game.new
+game.start

@@ -1,48 +1,48 @@
-class Guess
-  attr_reader :winning_combo, :user_guess #placeholders
+require_relative 'combo'
 
-  def initialize
-    @winning_combo = 'yrbg' #placeholders
-    @user_guess = 'bybb' #placeholders
+class Guess
+  attr_reader :combo_to_guess, :user_guess, :combo_array, :guess_array
+
+  def initialize(current_combo, current_guess)
+    @combo_to_guess = current_combo
+    @combo_array = @combo_to_guess.split('')
+
+    @user_guess = current_guess.to_s.downcase
+    @guess_array = @user_guess.split('')
   end
 
-  ## Stubbed Guess.evaluate method, for testing purposes:
-  def evaluate(combo_to_guess, current_guess)
-    combo_array = combo_to_guess.split('')
-    guess_array = current_guess.split('')
+  def evaluate_user_guess(combo_to_guess, current_guess)
+    correct_char_positions = 0
+    correct_elems_count = Hash.new
 
-    if current_guess.length < combo_to_guess.length
-      return 'Guess it too short. Try again!'
-    elsif current_guess.length > combo_to_guess.length
-      return 'Guess it too long. Try again!'
-    elsif current_guess.downcase == 'q'
-      abort "Game exiting... \n Goodbye!"
+    @guess_array.each_with_index do |char, index|
+      correct_char_positions += 1 if @guess_array[index] == @combo_array[index]
+      correct_elems_count[char] = true if @combo_array.index(char) != nil
+    end
+
+    puts "'#{current_guess.upcase}' has #{correct_elems_count.keys.length} of the correct elements with #{correct_char_positions} in the correct positions"
+  end
+
+  def evaluate_user_input(combo_to_guess, current_guess)
+    if current_guess.downcase == 'q'
+    	abort "Game exiting... \n Goodbye!"
     elsif current_guess.downcase == 'c'
-      return combo_to_guess
+      puts combo_to_guess
+    elsif current_guess.length < combo_to_guess.length
+      puts 'Guess is too short. Try again!'
+    elsif current_guess.length > combo_to_guess.length
+      puts 'Guess is too long. Try again!'
     else
-      correct_chars = 0
-
-      guess_array.each_with_index do |char, index|
-        if guess_array[index] == combo_array[index]
-          correct_chars +=1
-        end
-      end
-
-    # Check each element of our guess array and see if it's inside the combo array =+1 to our element counter.
-
-  	# winning_combo = [y,r,b,g]
-  	# guess array [b,y,b,b]
-
-      correct_elems = guess_array.count do |char|
-        combo_array.index(char) != nil
-      end
-
-      # correct_elems_count = correct_elems.length
-
-      return "'#{current_guess.upcase}' has #{correct_elems} of the correct elements with #{correct_chars} in the correct positions!"
+    	return self.evaluate_user_guess(combo_to_guess, current_guess)
     end
   end
+
 end
 
-guess = Guess.new
-p guess.evaluate(guess.winning_combo, guess.user_guess)
+
+# winning_combo = 'yrbg'
+# user_guess = 'yrbg'
+#
+# guess = Guess.new(winning_combo, user_guess)
+# # p guess
+# guess.evaluate_user_input(winning_combo, user_guess)

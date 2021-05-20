@@ -1,4 +1,5 @@
 require_relative 'combo'
+require_relative 'guess'
 
 class Game
 
@@ -23,7 +24,8 @@ class Game
       "I have generated a beginner sequence with four elements made up of:",
       "(r)ed, (g)reen, (b)lue, and (y)ellow.",
       "Use (q)uit at any time to end the game.",
-      "What's your guess?"
+      "What's your guess?",
+      ' >'
     ]
     @end_message = [''
     ]
@@ -48,16 +50,14 @@ class Game
   end
 
   def start
-    print_welcome
-    
+    self.print_welcome
     user_input = $stdin.gets.chomp
-    winning_combo = Combo.new.mixer
-
     if user_input == 'p'.downcase
-      print_start
-      # link in guessing stuff
+      self.print_start
+      user_input = $stdin.gets.chomp
+      self.run(Combo.new.mixer, user_input)
     elsif user_input == 'i'.downcase
-      print_instructions
+      self.print_instructions
       user_input = $stdin.gets.chomp
       self.start
     elsif user_input == 'q'.downcase
@@ -66,7 +66,14 @@ class Game
       self.start
     end
   end
+
+  def run(new_combo, user_guess)
+    # stub
+    puts "You are trying to guess '#{new_combo}', and instead you guessed '#{user_guess}'"
+  end
+
 end
 
-game = Game.new
-p game.start
+
+# game = Game.new
+# game.start

@@ -53,12 +53,12 @@ RSpec.describe Guess do
       user_input = "bbyb"
       guess = Guess.new(@stubbed_combo, user_input)
 
-      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq("'BBYB' has 2 of the correct elements with 2 in the correct positions")
+      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq("'BBYB' has 2 of the correct element(s) with 2 in the correct position(s).")
 
       user_input = "gbyb"
       guess = Guess.new(@stubbed_combo, user_input)
 
-      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq("'GBYB' has 3 of the correct elements with 3 in the correct positions")
+      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq("'GBYB' has 3 of the correct element(s) with 3 in the correct position(s).")
     end
 
     it "has a correct or incorrect guess" do

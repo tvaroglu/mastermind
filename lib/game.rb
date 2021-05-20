@@ -35,16 +35,25 @@ class Game
   end
 
   def end_game
+    single_vs_plural = "guesses"
+    single_vs_plural = 'guess' if @guess_counter == 1
+
     end_message = [
-      "Congratulations! You guessed the sequence '#{@winning_sequence}'",
-      "in #{@guess_counter} guesses over #{@elapsed_time}.",
+      "Congratulations! You guessed the sequence '#{@winning_sequence.upcase}'",
+      "in #{@guess_counter} #{single_vs_plural} over #{@elapsed_time}.",
       'Do you want to (p)lay again or (q)uit?',
       ' >'
     ]
     end_message.each { |line| puts line }
-
-    #call play again
-    #call quit
+    user_input = $stdin.gets.chomp
+    if user_input == 'p'.downcase
+      @guess_counter = 0
+      self.start
+    elsif user_input == 'q'.downcase
+      abort "Game exiting... \n Goodbye!"
+    else
+      self.end_game
+    end
   end
 
   def print_welcome
@@ -80,7 +89,12 @@ class Game
 
   def try_again
     @guess_counter += 1
-    return "You've taken #{@guess_counter} guess"
+
+    if @guess_counter == 1
+      return "You've taken #{@guess_counter} guess. \n >"
+    else
+      return "You've taken #{@guess_counter} guesses. \n >"
+    end
   end
 
   def run(first_guess)

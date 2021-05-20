@@ -40,7 +40,7 @@ class Guess
         correct_elems_count[char] = true if @combo_array.index(char) != nil
       end
 
-      return "'#{current_guess.upcase}' has #{correct_elems_count.keys.length} of the correct elements with #{correct_char_positions} in the correct positions"
+      return "'#{current_guess.upcase}' has #{correct_elems_count.keys.length} of the correct element(s) with #{correct_char_positions} in the correct position(s)."
     end
   end
 

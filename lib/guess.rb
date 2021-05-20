@@ -11,18 +11,6 @@ class Guess
     @guess_array = @user_guess.split('')
   end
 
-  def evaluate_user_guess(combo_to_guess, current_guess)
-    correct_char_positions = 0
-    correct_elems_count = Hash.new
-
-    @guess_array.each_with_index do |char, index|
-      correct_char_positions += 1 if @guess_array[index] == @combo_array[index]
-      correct_elems_count[char] = true if @combo_array.index(char) != nil
-    end
-
-    puts "'#{current_guess.upcase}' has #{correct_elems_count.keys.length} of the correct elements with #{correct_char_positions} in the correct positions"
-  end
-
   def evaluate_user_input(combo_to_guess, current_guess)
     if current_guess.downcase == 'q'
     	abort "Game exiting... \n Goodbye!"
@@ -37,8 +25,18 @@ class Guess
     end
   end
 
-end
+  def evaluate_user_guess(combo_to_guess, current_guess)
+    correct_char_positions = 0
+    correct_elems_count = Hash.new
 
+    @guess_array.each_with_index do |char, index|
+      correct_char_positions += 1 if @guess_array[index] == @combo_array[index]
+      correct_elems_count[char] = true if @combo_array.index(char) != nil
+    end
+
+    puts "'#{current_guess.upcase}' has #{correct_elems_count.keys.length} of the correct elements with #{correct_char_positions} in the correct positions"
+  end
+end
 
 # winning_combo = 'yrbg'
 # user_guess = 'yrbg'

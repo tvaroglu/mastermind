@@ -16,9 +16,9 @@ class Guess
   end
 
   def evaluate_user_input(combo_to_guess, current_guess)
-    if current_guess.downcase == 'q' # possible to refactor via [str, bool] retval syntax, to maintain SRP
+    if current_guess.downcase == 'q' || current_guess.downcase == 'quit'# possible to refactor via [str, bool] retval syntax, to maintain SRP
     	abort "Game exiting... \n Goodbye!"
-    elsif current_guess.downcase == 'c'
+    elsif current_guess.downcase == 'c' || current_guess.downcase == 'cheat'
       return combo_to_guess
     elsif current_guess.length < combo_to_guess.length
       return 'Guess is too short. Try again!'

@@ -16,19 +16,18 @@ class Game
       ' >'
     ]
     @instructions = [
-      ## Note, initialize method will need to be refactored for other difficulty levels
-      'You will be presented with a sequence of four elements (colors).',
+      'You will be presented with a sequence of colors.',
       'There are four possible colors (red, green, blue, and yellow).',
       'Each color is represented by the first letter (i.e. "r" = "red").',
       'Guess the correct four color combination to win the game (i.e. "yrbg").',
       'Colors can repeat, and every color does not have to be used.',
+      'Intermediate and Advanced difficulty levels will have longer and more complex sequences.',
       'Good luck!',
       '-'*30,
       'Type any key and press "Enter" to continue.',
       ' >'
     ]
     @start_message = [
-      ## Note, initialize method will need to be refactored for other difficulty levels
       '',
       '',
       'Use (q)uit at any time to end the game.',
@@ -86,7 +85,7 @@ class Game
     puts '(b)eginner, (i)ntermediate, or (a)dvanced.'
     puts ' >'
     user_input = $stdin.gets.chomp
-    @difficulty_level = user_input[0].downcase.to_sym
+    @difficulty_level = Combo.new(user_input[0]).difficulty_level
   end
 
   def print_start

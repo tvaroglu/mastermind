@@ -13,18 +13,22 @@ RSpec.describe Game do
       expect(@game.starting_time).to eq(0)
       expect(@game.ending_time).to eq(0)
       expect(@game.singular_vs_plural).to eq('guess')
+      expect(@game.difficulty_level).to eq(:b)
       expect(@game.winning_sequence).to eq('')
     end
 
     it 'prints messages' do
       puts "\n"
-      expect(@game.print_welcome.to_s).to include('Welcome', '(p)lay', ' >')
+      expect(@game.print_welcome.to_s).to include(
+        'Welcome', '(p)lay', ' >')
       puts "\n"
       puts '~'*50
-      expect(@game.print_start.to_s).to include('generated', '(b)lue', '(q)uit', 'your guess?')
+      expect(@game.print_start.to_s).to include(
+        '(q)uit', 'your guess?', ' >')
       puts "\n"
       puts '~'*50
-      expect(@game.print_instructions.to_s).to include('presented', 'four', 'represented', 'combination', 'repeat,', 'luck!', '-', 'press', ' >')
+      expect(@game.print_instructions.to_s).to include(
+        'presented', 'four', 'represented', 'combination', 'repeat,', 'difficulty levels', 'luck!', '-', 'press', ' >')
       puts "\n"
       puts '~'*50
     end

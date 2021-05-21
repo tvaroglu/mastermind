@@ -1,8 +1,8 @@
 class Combo
   attr_reader :difficulties, :difficulty_level, :mixer
 
-  def initialize(difficulty_level = 'b') #default level
-    @difficulty_level = difficulty_level.to_s[0].to_sym
+  def initialize(difficulty_level='b')
+    @difficulty_level = difficulty_level.to_s.downcase[0].to_sym
 
     @difficulties = {
       :b => {
@@ -41,8 +41,5 @@ class Combo
     @mixer = @mixer.join
   end
 
-end
 
-# combo = Combo.new('a')
-# # p combo.mixer
-# p combo.difficulties[combo.difficulty_level][:start_message][0..1]
+end

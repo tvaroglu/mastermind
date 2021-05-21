@@ -32,33 +32,38 @@ RSpec.describe Guess do
       user_input = "c"
       guess = Guess.new(@stubbed_combo, user_input)
 
-      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq(@stubbed_combo)
+      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq(
+        @stubbed_combo)
     end
 
     it "has too short of a guess" do
       user_input = "bby"
       guess = Guess.new(@stubbed_combo, user_input)
 
-      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq('Guess is too short. Try again!')
+      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq(
+        'Guess is too short. Try again!')
     end
 
     it "has too long of a guess" do
       user_input = "bbybb"
       guess = Guess.new(@stubbed_combo, user_input)
 
-      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq('Guess is too long. Try again!')
+      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq(
+        'Guess is too long. Try again!')
     end
 
     it "evaluates a guess if the guess length == answer length" do
       user_input = "bbyb"
       guess = Guess.new(@stubbed_combo, user_input)
 
-      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq("'BBYB' has 2 of the correct element(s) with 2 in the correct position(s).")
+      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq(
+        "'BBYB' has 2 of the correct element(s) with 2 in the correct position(s).")
 
       user_input = "gbyb"
       guess = Guess.new(@stubbed_combo, user_input)
 
-      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq("'GBYB' has 3 of the correct element(s) with 3 in the correct position(s).")
+      expect(guess.evaluate_user_input(@stubbed_combo, user_input)).to eq(
+        "'GBYB' has 3 of the correct element(s) with 3 in the correct position(s).")
     end
 
     it "has a correct or incorrect guess" do

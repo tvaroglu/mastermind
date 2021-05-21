@@ -6,6 +6,7 @@ class Game
               :starting_time,
               :ending_time,
               :singular_vs_plural,
+              :difficulty_level,
               :winning_sequence
 
   def initialize
@@ -28,8 +29,8 @@ class Game
     ]
     @start_message = [
       ## Note, initialize method will need to be refactored for other difficulty levels
-      'I have generated a beginner sequence with four elements made up of:',
-      '(r)ed, (g)reen, (b)lue, and (y)ellow.',
+      '',
+      '',
       'Use (q)uit at any time to end the game.',
       "What's your guess?",
       ' >'
@@ -38,6 +39,7 @@ class Game
     @starting_time = 0
     @ending_time = 0
     @singular_vs_plural = 'guess'
+    @difficulty_level = :b
     @winning_sequence = ''
   end
 
@@ -79,7 +81,17 @@ class Game
     @welcome_message.each { |line| puts line }
   end
 
+  def select_difficulty
+    puts 'Please enter a difficulty level:'
+    puts '(b)eginner, (i)ntermediate, or (a)dvanced.'
+    puts ' >'
+    user_input = $stdin.gets.chomp
+    @difficulty_level = user_input[0].downcase.to_sym
+  end
+
   def print_start
+    @start_message[0..1] = Combo.new(
+      @difficulty_level).difficulties[@difficulty_level][:start_message][0..1]
     @start_message.each { |line| puts line }
   end
 
@@ -91,10 +103,11 @@ class Game
     self.print_welcome
     user_input = $stdin.gets.chomp
     if user_input.downcase == 'p' || user_input.downcase == 'play'
+      self.select_difficulty
       self.print_start
       @starting_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       user_input = $stdin.gets.chomp
-      self.run(Guess.new(Combo.new.mixer, user_input))
+      self.run(Guess.new(Combo.new(@difficulty_level).mixer, user_input))
       # self.run(Guess.new("yybr", user_input)) # stub for user testing
     elsif user_input.downcase == 'i' || user_input.downcase == 'instructions'
       self.print_instructions

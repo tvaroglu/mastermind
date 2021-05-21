@@ -2,6 +2,11 @@ require_relative 'combo'
 require_relative 'guess'
 
 class Game
+  attr_reader :guess_counter,
+              :starting_time,
+              :ending_time,
+              :singular_vs_plural,
+              :winning_sequence
 
   def initialize
     @welcome_message = [
@@ -32,6 +37,7 @@ class Game
     @guess_counter = 0
     @starting_time = 0
     @ending_time = 0
+    @singular_vs_plural = 'guess'
     @winning_sequence = ''
   end
 
@@ -43,24 +49,21 @@ class Game
   end
 
   def end_game
-    single_vs_plural = 'guesses'
-    single_vs_plural = 'guess' if @guess_counter == 1
+    @singular_vs_plural = 'guesses' if @guess_counter >= 2
     @ending_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     end_message = [
       "Congratulations! You guessed the sequence '#{@winning_sequence.upcase}'",
-      "in #{@guess_counter} #{single_vs_plural} over #{self.timer} seconds.",
+      "in #{@guess_counter} #{@singular_vs_plural} over #{self.timer}.",
       'Do you want to (p)lay again or (q)uit?',
       ' >'
     ]
     end_message.each { |line| puts line }
     user_input = $stdin.gets.chomp
-    if user_input == 'p'.downcase
+    if user_input.downcase == 'p'
       @guess_counter = 0
       self.start
-    elsif user_input == 'q'.downcase
-      abort "Game exiting... \n Goodbye!"
     else
-      self.end_game
+      abort "Game exiting... \n Goodbye!"
     end
   end
 
@@ -79,17 +82,17 @@ class Game
   def start
     self.print_welcome
     user_input = $stdin.gets.chomp
-    if user_input == 'p'.downcase
+    if user_input.downcase == 'p'
       self.print_start
       @starting_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       user_input = $stdin.gets.chomp
       self.run(Guess.new(Combo.new.mixer, user_input))
       # self.run(Guess.new("yybr", user_input)) # stub for user testing
-    elsif user_input == 'i'.downcase
+    elsif user_input.downcase == 'i'
       self.print_instructions
       user_input = $stdin.gets.chomp
       self.start
-    elsif user_input == 'q'.downcase
+    elsif user_input.downcase == 'q'
       abort "Game exiting... \n Goodbye!"
     else
       self.start
@@ -121,13 +124,10 @@ class Game
         next_guess = $stdin.gets.chomp
         current_guess = Guess.new(@winning_sequence, next_guess)
       end
+      @guess_counter += 1
       self.end_game
     end
   end
 
+
 end
-
-
-# for testing locally
-game = Game.new
-game.start

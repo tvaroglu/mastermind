@@ -48,6 +48,14 @@ class Game
     return "#{minutes} minute(s) #{seconds} second(s)"
   end
 
+  def increment_guesses
+    @guess_counter += 1
+  end
+
+  def reset_guesses
+    @guess_counter = 0
+  end
+
   def end_game
     @singular_vs_plural = 'guesses' if @guess_counter >= 2
     @ending_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
@@ -59,8 +67,8 @@ class Game
     ]
     end_message.each { |line| puts line }
     user_input = $stdin.gets.chomp
-    if user_input.downcase == 'p'
-      @guess_counter = 0
+    if user_input.downcase == 'p' || user_input.downcase == 'play'
+      self.reset_guesses
       self.start
     else
       abort "Game exiting... \n Goodbye!"
@@ -82,17 +90,17 @@ class Game
   def start
     self.print_welcome
     user_input = $stdin.gets.chomp
-    if user_input.downcase == 'p'
+    if user_input.downcase == 'p' || user_input.downcase == 'play'
       self.print_start
       @starting_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       user_input = $stdin.gets.chomp
       self.run(Guess.new(Combo.new.mixer, user_input))
       # self.run(Guess.new("yybr", user_input)) # stub for user testing
-    elsif user_input.downcase == 'i'
+    elsif user_input.downcase == 'i' || user_input.downcase == 'instructions'
       self.print_instructions
       user_input = $stdin.gets.chomp
       self.start
-    elsif user_input.downcase == 'q'
+    elsif user_input.downcase == 'q' || user_input.downcase == 'quit'
       abort "Game exiting... \n Goodbye!"
     else
       self.start
@@ -100,7 +108,7 @@ class Game
   end
 
   def try_again
-    @guess_counter += 1
+    self.increment_guesses
     if @guess_counter == 1
       return "You've taken #{@guess_counter} guess. \n >"
     else
@@ -111,7 +119,7 @@ class Game
   def run(first_guess)
     @winning_sequence = first_guess.combo_to_guess
     if first_guess.is_correct?
-      @guess_counter = 1
+      self.increment_guesses
       self.end_game
     else
       puts first_guess.evaluate_user_input(@winning_sequence, first_guess.user_guess)
@@ -124,7 +132,7 @@ class Game
         next_guess = $stdin.gets.chomp
         current_guess = Guess.new(@winning_sequence, next_guess)
       end
-      @guess_counter += 1
+      self.increment_guesses
       self.end_game
     end
   end

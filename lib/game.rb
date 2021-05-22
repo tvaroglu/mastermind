@@ -55,9 +55,12 @@ class Game
 
   def reset_guesses
     @guess_counter = 0
+    # NEW line in method
+    @singular_vs_plural = 'guess'
   end
 
-  def end_game
+  # NEW method
+  def print_victory
     @singular_vs_plural = 'guesses' if @guess_counter >= 2
     @ending_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     end_message = [
@@ -67,6 +70,11 @@ class Game
       ' >'
     ]
     end_message.each { |line| puts line }
+  end
+
+  # Method modified (line 78 to call new method above)
+  def end_game
+    self.print_victory
     user_input = $stdin.gets.chomp
     if user_input.downcase == 'p' || user_input.downcase == 'play'
       self.reset_guesses

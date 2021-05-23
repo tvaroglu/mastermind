@@ -28,7 +28,7 @@ RSpec.describe Game do
       puts "\n"
       puts '~'*50
       expect(@game.print_instructions.to_s).to include(
-        'presented', 'four', 'represented', 'combination', 'repeat,', 'difficulty levels', 'luck!', '-', 'press', ' >')
+        'presented', 'four', 'represented', 'combination', 'repeat,', 'difficulty levels', 'luck!', '-', 'Press', ' >')
       puts "\n"
       puts '~'*50
     end

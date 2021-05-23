@@ -24,7 +24,7 @@ class Game
       'Intermediate and Advanced difficulty levels will have longer and more complex sequences.',
       'Good luck!',
       '-'*30,
-      'Type any key and press "Enter" to continue.',
+      'Press "Enter" to continue.',
       ' >'
     ]
     @start_message = [
@@ -87,10 +87,13 @@ class Game
 
   def select_difficulty
     puts 'Please enter a difficulty level:'
-    puts '(b)eginner, (i)ntermediate, or (a)dvanced.'
-    puts ' >'
+    puts "(b)eginner, (i)ntermediate, or (a)dvanced. \n >"
     user_input = $stdin.gets.chomp
-    @difficulty_level = Combo.new(user_input[0]).difficulty_level
+    if user_input == ''
+      @difficulty_level = :b
+    else
+      @difficulty_level = Combo.new(user_input[0]).difficulty_level
+    end
   end
 
   def print_start

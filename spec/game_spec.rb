@@ -18,19 +18,12 @@ RSpec.describe Game do
     end
 
     it 'prints messages' do
-      puts "\n"
-      expect(@game.print_welcome.to_s).to include(
+      expect(@game.welcome_message.to_s).to include(
         'Welcome', '(p)lay', ' >')
-      puts "\n"
-      puts '~'*50
-      expect(@game.print_start.to_s).to include(
+      expect(@game.start_message.to_s).to include(
         '(q)uit', 'your guess?', ' >')
-      puts "\n"
-      puts '~'*50
-      expect(@game.print_instructions.to_s).to include(
+      expect(@game.instructions.to_s).to include(
         'presented', 'four', 'represented', 'combination', 'repeat,', 'difficulty levels', 'luck!', '-', 'Press', ' >')
-      puts "\n"
-      puts '~'*50
     end
   end
 
@@ -43,7 +36,7 @@ RSpec.describe Game do
       @guess = Guess.new(@stubbed_sequence, @stubbed_user_guess)
     end
 
-    it 'can run when a user guesses until they win the game' do
+    xit '; unskip test for full run where a user guesses until they win the game or quit' do
       @game.run(@guess)
 
       expect(@game.winning_sequence).to eq(@stubbed_sequence)

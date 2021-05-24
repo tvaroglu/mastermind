@@ -2,7 +2,10 @@ require_relative 'combo'
 require_relative 'guess'
 
 class Game
-  attr_reader :guess_counter,
+  attr_reader :welcome_message,
+              :instructions,
+              :start_message,
+              :guess_counter,
               :starting_time,
               :ending_time,
               :singular_vs_plural,
@@ -44,7 +47,7 @@ class Game
 
   def timer
     total_time = (@ending_time - @starting_time).to_f
-    minutes = (total_time/60.to_f).floor
+    minutes = (total_time / 60.to_f).floor
     seconds = (total_time % 60).round
     return "#{minutes} minute(s) #{seconds} second(s)"
   end
@@ -59,6 +62,7 @@ class Game
   end
 
   def print_victory
+    self.increment_guesses
     @singular_vs_plural = 'guesses' if @guess_counter >= 2
     @ending_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     end_message = [
@@ -72,8 +76,8 @@ class Game
 
   def end_game
     self.print_victory
-    user_input = $stdin.gets.chomp
-    if user_input.downcase == 'p' || user_input.downcase == 'play'
+    user_selection = $stdin.gets.chomp
+    if user_selection.downcase[0] == 'p' || user_selection.downcase == ''
       self.reset_guesses
       self.start
     else
@@ -88,39 +92,39 @@ class Game
   def select_difficulty
     puts 'Please enter a difficulty level:'
     puts "(b)eginner, (i)ntermediate, or (a)dvanced. \n >"
-    user_input = $stdin.gets.chomp
-    if user_input == ''
+    user_selection = $stdin.gets.chomp
+    if user_selection == ''
       @difficulty_level = :b
     else
-      @difficulty_level = Combo.new(user_input[0]).difficulty_level
+      @difficulty_level = Combo.new(user_selection[0]).difficulty_level
     end
   end
 
   def print_start
     @start_message[0..1] = Combo.new(
       @difficulty_level).difficulties[@difficulty_level][:start_message][0..1]
+    @starting_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     @start_message.each { |line| puts line }
   end
 
   def print_instructions
     @instructions.each { |line| puts line }
+    user_input = $stdin.gets.chomp
+    self.start
   end
 
   def start
     self.print_welcome
-    user_input = $stdin.gets.chomp
-    if user_input.downcase == 'p' || user_input.downcase == 'play'
+    user_selection = $stdin.gets.chomp
+    if user_selection.downcase[0] == 'p'
       self.select_difficulty
       self.print_start
-      @starting_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-      user_input = $stdin.gets.chomp
-      self.run(Guess.new(Combo.new(@difficulty_level).mixer, user_input))
-      # self.run(Guess.new("yybr", user_input)) # stub for user testing
-    elsif user_input.downcase == 'i' || user_input.downcase == 'instructions'
+      user_guess = $stdin.gets.chomp
+      self.run(Guess.new((Combo.new(@difficulty_level).mixer), user_guess))
+      # self.run(Guess.new("yybr", user_guess)) # stub for user testing
+    elsif user_selection.downcase[0] == 'i'
       self.print_instructions
-      user_input = $stdin.gets.chomp
-      self.start
-    elsif user_input.downcase == 'q' || user_input.downcase == 'quit'
+    elsif user_selection.downcase[0] == 'q'
       abort "Game exiting... \n Goodbye!"
     else
       self.start
@@ -139,7 +143,6 @@ class Game
   def run(first_guess)
     @winning_sequence = first_guess.combo_to_guess
     if first_guess.is_correct?
-      self.increment_guesses
       self.end_game
     else
       puts first_guess.evaluate_user_input(@winning_sequence, first_guess.user_guess)
@@ -152,7 +155,6 @@ class Game
         next_guess = $stdin.gets.chomp
         current_guess = Guess.new(@winning_sequence, next_guess)
       end
-      self.increment_guesses
       self.end_game
     end
   end

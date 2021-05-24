@@ -2,7 +2,7 @@ require 'rspec'
 require_relative '../lib/combo'
 
 RSpec.describe Combo do
-  context 'default / beginner level' do
+  context 'beginner difficulty level' do
     it 'initializes' do
       combo1 = Combo.new
 
@@ -28,7 +28,7 @@ RSpec.describe Combo do
     end
   end
 
-  context 'intermediate level' do
+  context 'intermediate difficulty level' do
     it 'initializes' do
       combo = Combo.new('intermediate')
 
@@ -48,7 +48,7 @@ RSpec.describe Combo do
     end
   end
 
-  context 'advanced level' do
+  context 'advanced difficulty level' do
     it 'initializes' do
       combo = Combo.new('ADVANCEDDDDDDD')
 

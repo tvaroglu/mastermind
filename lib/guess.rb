@@ -33,12 +33,14 @@ class Guess
     if self.is_correct? == false
       correct_char_positions = 0
       correct_elems_count = Hash.new
-
       @guess_array.each_with_index do |char, index|
         correct_char_positions += 1 if @guess_array[index] == @combo_array[index]
         correct_elems_count[char] = true if @combo_array.index(char) != nil
       end
-      return "'#{current_guess.upcase}' has #{correct_elems_count.keys.length} of the correct element(s) with #{correct_char_positions} in the correct position(s)."
+      result = [
+        "'#{current_guess.upcase}' has #{correct_elems_count.keys.length} of the correct element(s)",
+        "with #{correct_char_positions} in the correct position(s)."]
+      return result.each { |line| line }
     end
   end
 

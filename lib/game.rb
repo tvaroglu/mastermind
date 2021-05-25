@@ -145,10 +145,7 @@ class Game
     if first_guess.is_correct?
       self.end_game
     else
-      puts first_guess.evaluate_user_input(@winning_sequence, first_guess.user_guess)
-      puts self.try_again
-      next_guess = $stdin.gets.chomp
-      current_guess = Guess.new(@winning_sequence, next_guess)
+      current_guess = first_guess
       until current_guess.user_guess == @winning_sequence
         puts current_guess.evaluate_user_input(@winning_sequence, current_guess.user_guess)
         puts self.try_again

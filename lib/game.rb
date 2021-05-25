@@ -131,8 +131,8 @@ class Game
     end
   end
 
-  def try_again
-    self.increment_guesses
+  def try_again(last_guess)
+    self.increment_guesses unless last_guess.downcase == 'c' || last_guess.downcase == 'cheat'
     if @guess_counter == 1
       return "You've taken #{@guess_counter} guess. \n >"
     else
@@ -148,7 +148,7 @@ class Game
       current_guess = first_guess
       until current_guess.user_guess == @winning_sequence
         puts current_guess.evaluate_user_input(@winning_sequence, current_guess.user_guess)
-        puts self.try_again
+        puts self.try_again(current_guess.user_guess)
         next_guess = $stdin.gets.chomp
         current_guess = Guess.new(@winning_sequence, next_guess)
       end

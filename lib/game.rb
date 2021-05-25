@@ -1,5 +1,6 @@
 require_relative 'combo'
 require_relative 'guess'
+require_relative 'score'
 
 class Game
   attr_reader :welcome_message,

@@ -1,0 +1,88 @@
+{
+  "Taylor": {
+    "b": {
+      "most_recent_game": {
+        "winning_sequence": "BGGB",
+        "num_guesses": 14,
+        "elapsed_time_in_seconds": 75
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "BYGB",
+          "num_guesses": 12,
+          "elapsed_time_in_seconds": 132
+        },
+        {
+          "winning_sequence": "BGGB",
+          "num_guesses": 14,
+          "elapsed_time_in_seconds": 75
+        }
+      ]
+    },
+    "i": {
+      "most_recent_game": {
+        "winning_sequence": "BYRGGB",
+        "num_guesses": 9,
+        "elapsed_time_in_seconds": 40
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "BYRGGB",
+          "num_guesses": 9,
+          "elapsed_time_in_seconds": 40
+        }
+      ]
+    }
+  },
+  "Caroline": {
+    "i": {
+      "most_recent_game": {
+        "winning_sequence": "PYGGRB",
+        "num_guesses": 15,
+        "elapsed_time_in_seconds": 143
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "BYRGGB",
+          "num_guesses": 9,
+          "elapsed_time_in_seconds": 32
+        },
+        {
+          "winning_sequence": "PYGGRB",
+          "num_guesses": 15,
+          "elapsed_time_in_seconds": 143
+        }
+      ]
+    },
+    "b": {
+      "most_recent_game": {
+        "winning_sequence": "YRRB",
+        "num_guesses": 8,
+        "elapsed_time_in_seconds": 23
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "YRRB",
+          "num_guesses": 8,
+          "elapsed_time_in_seconds": 23
+        }
+      ]
+    }
+  },
+  "Salih": {
+    "a": {
+      "most_recent_game": {
+        "winning_sequence": "BOOYRGGB",
+        "num_guesses": 50,
+        "elapsed_time_in_seconds": 1203
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "BOOYRGGB",
+          "num_guesses": 50,
+          "elapsed_time_in_seconds": 1203
+        }
+      ]
+    }
+  }
+}

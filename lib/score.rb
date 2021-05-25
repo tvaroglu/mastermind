@@ -19,9 +19,9 @@ class Score
 		@difficulty_level = difficulty_level.to_sym
 		@winning_sequence = winning_sequence.to_s.upcase
 		@guess_counter = guess_counter
-		@elapsed_time = elapsed_time
-		# @elapsed_time = (
-    #   (elapsed_time.split(' ')[0].to_i * 60) + (elapsed_time.split(' ')[2].to_i))
+		# @elapsed_time = elapsed_time
+		@elapsed_time = (
+      (elapsed_time.split(' ')[0].to_i * 60) + (elapsed_time.split(' ')[2].to_i))
 
 		@file_path = './lib/scores.json'
 		@top_10 = Array.new
@@ -160,6 +160,5 @@ class Score
 
 end
 
- 
 # test_score_metrics_run = Score.new('Admin', :b, 'yrbb', 1, 5)
 # test_score_metrics_run.retrieve_metrics

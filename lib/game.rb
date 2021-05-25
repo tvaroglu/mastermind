@@ -72,7 +72,18 @@ class Game
       'Do you want to (p)lay again or (q)uit?',
       ' >'
     ]
-    end_message.each { |line| puts line }
+    end_message[0..1].each { |line| puts line }
+    self.collect_high_score
+    end_message[2..3].each { |line| puts line }
+  end
+
+  def collect_high_score
+    puts "Congratulations! You've guessed the sequence! What's your name? \n >"
+    user_name = $stdin.gets.chomp
+    score = Score.new(
+      user_name, @difficulty_level, @winning_sequence, @guess_counter, self.timer)
+    score.write_scores
+    score.retrieve_metrics
   end
 
   def end_game
@@ -156,6 +167,5 @@ class Game
       self.end_game
     end
   end
-
 
 end

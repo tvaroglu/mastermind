@@ -2,15 +2,20 @@
   "Taylor": {
     "b": {
       "most_recent_game": {
-        "winning_sequence": "YRYG",
-        "num_guesses": 24,
-        "elapsed_time_in_seconds": 135
+        "winning_sequence": "YBRR",
+        "num_guesses": 11,
+        "elapsed_time_in_seconds": 51
       },
       "all_games_played": [
         {
           "winning_sequence": "YRYG",
           "num_guesses": 24,
           "elapsed_time_in_seconds": 135
+        },
+        {
+          "winning_sequence": "YBRR",
+          "num_guesses": 11,
+          "elapsed_time_in_seconds": 51
         }
       ]
     }

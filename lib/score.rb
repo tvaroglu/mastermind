@@ -102,7 +102,9 @@ class Score
     json_blob = self.retrieve_scores_file
     self.aggregate_scores(
       json_blob, @player_name, @difficulty_level, @winning_sequence, @guess_counter, @elapsed_time)
-    writer = File.write(@file_path, JSON.pretty_generate(json_blob))
+    writer = File.open(@file_path, 'w')
+    File.write(writer, JSON.pretty_generate(json_blob))
+    writer.close
   end
 
   def retrieve_metrics

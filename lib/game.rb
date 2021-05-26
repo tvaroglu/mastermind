@@ -93,7 +93,7 @@ class Game
       self.reset_guesses
       self.start
     else
-      abort "Game exiting... \n Goodbye!"
+      puts "Game exiting... \n Goodbye!"
     end
   end
 
@@ -136,7 +136,7 @@ class Game
     elsif user_selection.downcase[0] == 'i'
       self.print_instructions
     elsif user_selection.downcase[0] == 'q'
-      abort "Game exiting... \n Goodbye!"
+      puts "Game exiting... \n Goodbye!"
     else
       self.start
     end

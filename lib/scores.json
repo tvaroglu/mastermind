@@ -68,5 +68,26 @@
         }
       ]
     }
+  },
+  "Neo": {
+    "a": {
+      "most_recent_game": {
+        "winning_sequence": "ORPYOGOG",
+        "num_guesses": 2,
+        "elapsed_time_in_seconds": 8
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "YBPPBGYR",
+          "num_guesses": 4,
+          "elapsed_time_in_seconds": 9
+        },
+        {
+          "winning_sequence": "ORPYOGOG",
+          "num_guesses": 2,
+          "elapsed_time_in_seconds": 8
+        }
+      ]
+    }
   }
 }

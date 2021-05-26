@@ -3,7 +3,6 @@ require 'json'
 require_relative '../lib/score'
 
 RSpec.describe Score do
-
   before :each do
     @player_name = 'admin'
     @difficulty_level = :b
@@ -15,7 +14,7 @@ RSpec.describe Score do
       @player_name, @difficulty_level, @winning_sequence, @guess_counter, @elapsed_time)
   end
 
-  it "initializes" do
+  it 'initializes' do
     expect(@score).to be_an_instance_of(Score)
     expect(@score.player_name).to eq(:Admin)
     expect(@score.difficulty_level).to eq(:b)
@@ -29,39 +28,41 @@ RSpec.describe Score do
     expect(@score.top_10.length).to eq(0)
   end
 
-  it "can retrieve scores" do
+  it 'can retrieve scores' do
     expect(@score.retrieve_scores_file).to be_a(Hash)
   end
 
-  it "can convert time" do
+  it 'can convert time' do
     expect(@score.convert_time(@score.elapsed_time)).to eq('2 minute(s) 30 second(s)')
   end
 
-  xit "can congratulate a player" do
-    average_guesses_1 = 13
-    average_time_1 = 140
+  context 'it can congratulate a player for winning the game' do
+      it 'is a player slower than average, but more deliberate than average' do
+        average_guesses = 13
+        average_time = 140
 
-    @score.congratulate_player(average_guesses_1, average_time_1).to_s
+        puts "\n"
+        expect(@score.congratulate_player(average_guesses, average_time).to_s).to include(
+          'Admin', 'BYRG', '12', '2 minute(s) 30 second(s)', '10', 'slower than', '1', 'fewer than')
+      end
 
-    expect(@score.congratulate_player(average_guesses_1, average_time_1).to_s).to include(
-      'Admin', 'BYRG', '12', '2 minute(s) 30 second(s)', '10', 'slower', '1', 'fewer')
+      it 'is a player faster than average, but less deliberate than average' do
+        average_guesses = 6
+        average_time = 160
 
-    average_guesses_2 = 6
-    average_time_2 = 205
+        puts "\n"
+        expect(@score.congratulate_player(average_guesses, average_time).to_s).to include(
+          'Admin', 'BYRG', '12', '2 minute(s) 30 second(s)', '10', 'faster than', '6', 'more than')
+      end
 
-    @score.congratulate_player(average_guesses_2, average_time_2).to_s
-# require "pry"; binding.pry
-    expect(@score.congratulate_player(average_guesses_2, average_time_2).to_s).to include(
-      'Admin', 'BYRG', '12', '2 minute(s) 30 second(s)', '55', 'faster', '6', 'more than')
+      it 'is a player that performs exactly equal to average metrics' do
+        average_guesses = 12
+        average_time = 150
 
-    average_guesses_3 = 12
-    average_time_3 = 150
-
-    @score.congratulate_player(average_guesses_3, average_time_3).to_s
-
-    expect(@score.congratulate_player(average_guesses_3, average_time_3).to_s).to include(
-      'Admin', 'BYRG', '12', '2 minute(s) 30 second(s)', '0', 'equal to', '0', 'equal to')
-
+        puts "\n"
+        expect(@score.congratulate_player(average_guesses, average_time).to_s).to include(
+          'Admin', 'BYRG', '12', '2 minute(s) 30 second(s)', '0', 'faster than', '0', 'fewer than')
+      end
   end
 
 end

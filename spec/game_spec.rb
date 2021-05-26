@@ -2,7 +2,7 @@ require 'rspec'
 require_relative '../lib/game'
 
 RSpec.describe Game do
-  context "the user hasn't played yet" do
+  context "the user hasn't started guessing yet" do
     before :each do
       @game = Game.new
     end
@@ -27,7 +27,7 @@ RSpec.describe Game do
     end
   end
 
-  context 'the user started playing' do
+  context ': the user started guessing' do
     before :each do
       @game = Game.new
       @stubbed_sequence = 'yybr'
@@ -36,7 +36,7 @@ RSpec.describe Game do
       @guess = Guess.new(@stubbed_sequence, @stubbed_user_guess)
     end
 
-    xit '; unskip test for full run where a user guesses until they win the game or quit' do
+    xit '. Unskip test for full run where a user guesses until they win the game or quit' do
       @game.run(@guess)
 
       expect(@game.winning_sequence).to eq(@stubbed_sequence)

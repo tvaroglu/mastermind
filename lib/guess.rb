@@ -16,7 +16,7 @@ class Guess
   end
 
   def evaluate_user_input(combo_to_guess, current_guess)
-    if current_guess.downcase == 'q' || current_guess.downcase == 'quit' # possible to refactor via [str, bool] retval syntax, to maintain SRP??
+    if current_guess.downcase == 'q' || current_guess.downcase == 'quit'
     	abort "Game exiting... \n Goodbye!"
     elsif current_guess.downcase == 'c' || current_guess.downcase == 'cheat'
       return combo_to_guess

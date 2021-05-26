@@ -102,7 +102,7 @@ class Game
   end
 
   def select_difficulty
-    puts 'Please enter a difficulty level:'
+    puts 'Please select a difficulty level:'
     puts "(b)eginner, (i)ntermediate, or (a)dvanced. \n >"
     user_selection = $stdin.gets.chomp
     if user_selection == ''
@@ -133,7 +133,6 @@ class Game
       self.print_start
       user_guess = $stdin.gets.chomp
       self.run(Guess.new((Combo.new(@difficulty_level).mixer), user_guess))
-      # self.run(Guess.new("yybr", user_guess)) # stub for user testing
     elsif user_selection.downcase[0] == 'i'
       self.print_instructions
     elsif user_selection.downcase[0] == 'q'
@@ -167,5 +166,6 @@ class Game
       self.end_game
     end
   end
+
 
 end

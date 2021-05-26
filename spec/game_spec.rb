@@ -36,7 +36,7 @@ RSpec.describe Game do
       @guess = Guess.new(@stubbed_sequence, @stubbed_user_guess)
     end
 
-    xit '. Unskip test for full run where a user guesses until they win the game or quit' do
+    xit '. Unskip test for a full run where a user can guess until they win the game or quit' do
       @game.run(@guess)
 
       expect(@game.winning_sequence).to eq(@stubbed_sequence)

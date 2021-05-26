@@ -1,5 +1,6 @@
 require_relative 'combo'
 require_relative 'guess'
+require_relative 'score'
 
 class Game
   attr_reader :welcome_message,
@@ -71,7 +72,18 @@ class Game
       'Do you want to (p)lay again or (q)uit?',
       ' >'
     ]
-    end_message.each { |line| puts line }
+    end_message[0..1].each { |line| puts line }
+    self.collect_high_score
+    end_message[2..3].each { |line| puts line }
+  end
+
+  def collect_high_score
+    puts "Congratulations! You've guessed the sequence! What's your name? \n >"
+    user_name = $stdin.gets.chomp
+    score = Score.new(
+      user_name, @difficulty_level, @winning_sequence, @guess_counter, self.timer)
+    score.write_scores
+    score.retrieve_metrics
   end
 
   def end_game
@@ -81,7 +93,7 @@ class Game
       self.reset_guesses
       self.start
     else
-      abort "Game exiting... \n Goodbye!"
+      puts "Game exiting... \n Goodbye!"
     end
   end
 
@@ -90,7 +102,7 @@ class Game
   end
 
   def select_difficulty
-    puts 'Please enter a difficulty level:'
+    puts 'Please select a difficulty level:'
     puts "(b)eginner, (i)ntermediate, or (a)dvanced. \n >"
     user_selection = $stdin.gets.chomp
     if user_selection == ''
@@ -121,18 +133,17 @@ class Game
       self.print_start
       user_guess = $stdin.gets.chomp
       self.run(Guess.new((Combo.new(@difficulty_level).mixer), user_guess))
-      # self.run(Guess.new("yybr", user_guess)) # stub for user testing
     elsif user_selection.downcase[0] == 'i'
       self.print_instructions
     elsif user_selection.downcase[0] == 'q'
-      abort "Game exiting... \n Goodbye!"
+      puts "Game exiting... \n Goodbye!"
     else
       self.start
     end
   end
 
-  def try_again
-    self.increment_guesses
+  def try_again(last_guess)
+    self.increment_guesses unless last_guess.downcase == 'c' || last_guess.downcase == 'cheat'
     if @guess_counter == 1
       return "You've taken #{@guess_counter} guess. \n >"
     else
@@ -145,13 +156,10 @@ class Game
     if first_guess.is_correct?
       self.end_game
     else
-      puts first_guess.evaluate_user_input(@winning_sequence, first_guess.user_guess)
-      puts self.try_again
-      next_guess = $stdin.gets.chomp
-      current_guess = Guess.new(@winning_sequence, next_guess)
+      current_guess = first_guess
       until current_guess.user_guess == @winning_sequence
         puts current_guess.evaluate_user_input(@winning_sequence, current_guess.user_guess)
-        puts self.try_again
+        puts self.try_again(current_guess.user_guess)
         next_guess = $stdin.gets.chomp
         current_guess = Guess.new(@winning_sequence, next_guess)
       end

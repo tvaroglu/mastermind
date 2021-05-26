@@ -1,0 +1,93 @@
+{
+  "Taylor": {
+    "b": {
+      "most_recent_game": {
+        "winning_sequence": "YBRR",
+        "num_guesses": 11,
+        "elapsed_time_in_seconds": 51
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "YRYG",
+          "num_guesses": 24,
+          "elapsed_time_in_seconds": 135
+        },
+        {
+          "winning_sequence": "YBRR",
+          "num_guesses": 11,
+          "elapsed_time_in_seconds": 51
+        }
+      ]
+    }
+  },
+  "Admin": {
+    "i": {
+      "most_recent_game": {
+        "winning_sequence": "PYPGPR",
+        "num_guesses": 3,
+        "elapsed_time_in_seconds": 8
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "PYPGPR",
+          "num_guesses": 3,
+          "elapsed_time_in_seconds": 8
+        }
+      ]
+    },
+    "a": {
+      "most_recent_game": {
+        "winning_sequence": "POOGRBRP",
+        "num_guesses": 4,
+        "elapsed_time_in_seconds": 12
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "GGPGGRPG",
+          "num_guesses": 5,
+          "elapsed_time_in_seconds": 21
+        },
+        {
+          "winning_sequence": "POOGRBRP",
+          "num_guesses": 4,
+          "elapsed_time_in_seconds": 12
+        }
+      ]
+    },
+    "b": {
+      "most_recent_game": {
+        "winning_sequence": "GYGY",
+        "num_guesses": 4,
+        "elapsed_time_in_seconds": 8
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "GYGY",
+          "num_guesses": 4,
+          "elapsed_time_in_seconds": 8
+        }
+      ]
+    }
+  },
+  "Neo": {
+    "a": {
+      "most_recent_game": {
+        "winning_sequence": "ORPYOGOG",
+        "num_guesses": 2,
+        "elapsed_time_in_seconds": 8
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "YBPPBGYR",
+          "num_guesses": 4,
+          "elapsed_time_in_seconds": 9
+        },
+        {
+          "winning_sequence": "ORPYOGOG",
+          "num_guesses": 2,
+          "elapsed_time_in_seconds": 8
+        }
+      ]
+    }
+  }
+}

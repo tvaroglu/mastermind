@@ -37,15 +37,20 @@
     },
     "a": {
       "most_recent_game": {
-        "winning_sequence": "GGPGGRPG",
-        "num_guesses": 5,
-        "elapsed_time_in_seconds": 21
+        "winning_sequence": "POOGRBRP",
+        "num_guesses": 4,
+        "elapsed_time_in_seconds": 12
       },
       "all_games_played": [
         {
           "winning_sequence": "GGPGGRPG",
           "num_guesses": 5,
           "elapsed_time_in_seconds": 21
+        },
+        {
+          "winning_sequence": "POOGRBRP",
+          "num_guesses": 4,
+          "elapsed_time_in_seconds": 12
         }
       ]
     },

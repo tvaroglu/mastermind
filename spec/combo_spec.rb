@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../lib/combo'
+require_relative 'spec_helper'
 
 RSpec.describe Combo do
   context 'beginner difficulty level' do

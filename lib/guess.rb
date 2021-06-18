@@ -1,7 +1,8 @@
-require_relative 'combo'
-
 class Guess
-  attr_reader :combo_to_guess, :user_guess, :combo_array, :guess_array
+  attr_reader :combo_to_guess,
+              :user_guess,
+              :combo_array,
+              :guess_array
 
   def initialize(current_combo, current_guess)
     @combo_to_guess = current_combo
@@ -12,25 +13,25 @@ class Guess
   end
 
   def is_correct?
-    return @combo_to_guess == @user_guess
+    @combo_to_guess == @user_guess
   end
 
   def evaluate_user_input(combo_to_guess, current_guess)
     if current_guess.downcase == 'q' || current_guess.downcase == 'quit'
       abort "Game exiting... \n Goodbye!"
     elsif current_guess.downcase == 'c' || current_guess.downcase == 'cheat'
-      return combo_to_guess
+      combo_to_guess
     elsif current_guess.length < combo_to_guess.length
-      return 'Guess is too short. Try again!'
+      'Guess is too short. Try again!'
     elsif current_guess.length > combo_to_guess.length
-      return 'Guess is too long. Try again!'
+      'Guess is too long. Try again!'
     else
-      return self.evaluate_user_guess(combo_to_guess, current_guess)
+      evaluate_user_guess(combo_to_guess, current_guess)
     end
   end
 
   def evaluate_user_guess(combo_to_guess, current_guess)
-    if self.is_correct? == false
+    if is_correct? == false
       correct_char_positions = 0
       correct_elems_count = Hash.new
       @guess_array.each_with_index do |char, index|
@@ -40,7 +41,7 @@ class Guess
       result = [
         "'#{current_guess.upcase}' has #{correct_elems_count.keys.length} of the correct element(s)",
         "with #{correct_char_positions} in the correct position(s)."]
-      return result.each { |line| line }
+      result.each { |line| line }
     end
   end
 

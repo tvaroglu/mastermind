@@ -1,0 +1,98 @@
+{
+  "Taylor": {
+    "b": {
+      "most_recent_game": {
+        "winning_sequence": "YRBG",
+        "num_guesses": 8,
+        "elapsed_time_in_seconds": 98
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "BBYY",
+          "num_guesses": 12,
+          "elapsed_time_in_seconds": 205
+        },
+        {
+          "winning_sequence": "GRYR",
+          "num_guesses": 7,
+          "elapsed_time_in_seconds": 142
+        },
+        {
+          "winning_sequence": "YRBG",
+          "num_guesses": 8,
+          "elapsed_time_in_seconds": 98
+        }
+      ]
+    }
+  },
+  "Caroline": {
+    "i": {
+      "most_recent_game": {
+        "winning_sequence": "RGYGBO",
+        "num_guesses": 32,
+        "elapsed_time_in_seconds": 845
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "YRRRBG",
+          "num_guesses": 20,
+          "elapsed_time_in_seconds": 423
+        },
+        {
+          "winning_sequence": "RGYGBO",
+          "num_guesses": 32,
+          "elapsed_time_in_seconds": 845
+        }
+      ]
+    },
+    "b": {
+      "most_recent_game": {
+        "winning_sequence": "GGGB",
+        "num_guesses": 15,
+        "elapsed_time_in_seconds": 96
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "RBRB",
+          "num_guesses": 12,
+          "elapsed_time_in_seconds": 154
+        },
+        {
+          "winning_sequence": "GGGB",
+          "num_guesses": 15,
+          "elapsed_time_in_seconds": 96
+        }
+      ]
+    },
+    "a": {
+      "most_recent_game": {
+        "winning_sequence": "POYGGGOB",
+        "num_guesses": 40,
+        "elapsed_time_in_seconds": 1045
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "POYGGGOB",
+          "num_guesses": 40,
+          "elapsed_time_in_seconds": 1045
+        }
+      ]
+    }
+  },
+  "Salih": {
+    "a": {
+      "most_recent_game": {
+        "winning_sequence": "PYRGYGBO",
+        "num_guesses": 51,
+        "elapsed_time_in_seconds": 1432
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "PYRGYGBO",
+          "num_guesses": 51,
+          "elapsed_time_in_seconds": 1432
+        }
+      ]
+    }
+  }
+}

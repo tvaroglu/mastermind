@@ -2,9 +2,9 @@
   "Taylor": {
     "b": {
       "most_recent_game": {
-        "winning_sequence": "YBRR",
-        "num_guesses": 11,
-        "elapsed_time_in_seconds": 51
+        "winning_sequence": "GGRG",
+        "num_guesses": 13,
+        "elapsed_time_in_seconds": 34
       },
       "all_games_played": [
         {
@@ -16,22 +16,37 @@
           "winning_sequence": "YBRR",
           "num_guesses": 11,
           "elapsed_time_in_seconds": 51
+        },
+        {
+          "winning_sequence": "BBGB",
+          "num_guesses": 11,
+          "elapsed_time_in_seconds": 34
+        },
+        {
+          "winning_sequence": "GGRG",
+          "num_guesses": 13,
+          "elapsed_time_in_seconds": 34
         }
       ]
     }
   },
-  "Admin": {
+  "Trinity": {
     "i": {
       "most_recent_game": {
-        "winning_sequence": "PYPGPR",
-        "num_guesses": 3,
-        "elapsed_time_in_seconds": 8
+        "winning_sequence": "RRRRGB",
+        "num_guesses": 5,
+        "elapsed_time_in_seconds": 18
       },
       "all_games_played": [
         {
           "winning_sequence": "PYPGPR",
           "num_guesses": 3,
           "elapsed_time_in_seconds": 8
+        },
+        {
+          "winning_sequence": "RRRRGB",
+          "num_guesses": 5,
+          "elapsed_time_in_seconds": 18
         }
       ]
     },
@@ -86,6 +101,57 @@
           "winning_sequence": "ORPYOGOG",
           "num_guesses": 2,
           "elapsed_time_in_seconds": 8
+        }
+      ]
+    }
+  },
+  "Cipher": {
+    "b": {
+      "most_recent_game": {
+        "winning_sequence": "RYYG",
+        "num_guesses": 3,
+        "elapsed_time_in_seconds": 14
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "RYYG",
+          "num_guesses": 3,
+          "elapsed_time_in_seconds": 14
+        }
+      ]
+    }
+  },
+  "Morpheus": {
+    "i": {
+      "most_recent_game": {
+        "winning_sequence": "PYGYPB",
+        "num_guesses": 3,
+        "elapsed_time_in_seconds": 7
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "PYGYPB",
+          "num_guesses": 3,
+          "elapsed_time_in_seconds": 7
+        }
+      ]
+    },
+    "a": {
+      "most_recent_game": {
+        "winning_sequence": "OYGPBPBY",
+        "num_guesses": 5,
+        "elapsed_time_in_seconds": 38
+      },
+      "all_games_played": [
+        {
+          "winning_sequence": "YROPGBOO",
+          "num_guesses": 4,
+          "elapsed_time_in_seconds": 16
+        },
+        {
+          "winning_sequence": "OYGPBPBY",
+          "num_guesses": 5,
+          "elapsed_time_in_seconds": 38
         }
       ]
     }

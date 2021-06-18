@@ -27,6 +27,7 @@ RSpec.describe Score do
     expect(@score.file_path).to eq('./notes/scores.json')
     expect(@score.faster_vs_slower).to eq('faster than the average')
     expect(@score.more_vs_fewer).to eq('fewer than the average')
+    expect(@score.singular_vs_plural).to eq('guess')
 
     expect(@score.top_10).to be_an(Array)
     expect(@score.top_10.length).to eq(0)
@@ -36,23 +37,9 @@ RSpec.describe Score do
     expect(@score.total_guesses).to eq(0)
   end
 
-  it 'can retrieve scores and reset metrics' do
+  it 'can retrieve scores' do
     expect(@score.retrieve_scores).to be_a(Hash)
     expect(@score.retrieve_metrics).to eq(@score.top_10)
-
-    @score.instance_variable_set(:@total_games, 8)
-    @score.instance_variable_set(:@total_time, 140)
-    @score.instance_variable_set(:@total_guesses, 13)
-
-    expect(@score.total_games).to eq(8)
-    expect(@score.total_time).to eq(140)
-    expect(@score.total_guesses).to eq(13)
-
-    @score.reset_metrics
-
-    expect(@score.total_games).to eq(0)
-    expect(@score.total_time).to eq(0)
-    expect(@score.total_guesses).to eq(0)
   end
 
   it 'can convert time' do
@@ -67,7 +54,7 @@ RSpec.describe Score do
       @score.update_grammar(average_guesses, average_time)
 
       expected = [
-        "\n#{@score.player_name}, you guessed the sequence '#{@score.winning_sequence}' in #{@guess_counter} guesses over #{@score.convert_time(@score.elapsed_time)}.",
+        "\n#{@score.player_name}, you guessed the sequence '#{@score.winning_sequence}' in #{@guess_counter} #{@score.singular_vs_plural} over #{@score.convert_time(@score.elapsed_time)}.",
         "That's #{@score.convert_time((@score.elapsed_time - average_time).abs)} #{@score.faster_vs_slower} and #{(@guess_counter - average_guesses).abs} guesses #{@score.more_vs_fewer}."
       ]
       expect(@score.congratulate_player(average_guesses, average_time)).to eq(expected)
@@ -80,7 +67,7 @@ RSpec.describe Score do
       @score.update_grammar(average_guesses, average_time)
 
       expected = [
-        "\n#{@score.player_name}, you guessed the sequence '#{@score.winning_sequence}' in #{@guess_counter} guesses over #{@score.convert_time(@score.elapsed_time)}.",
+        "\n#{@score.player_name}, you guessed the sequence '#{@score.winning_sequence}' in #{@guess_counter} #{@score.singular_vs_plural} over #{@score.convert_time(@score.elapsed_time)}.",
         "That's #{@score.convert_time((@score.elapsed_time - average_time).abs)} #{@score.faster_vs_slower} and #{(@guess_counter - average_guesses).abs} guesses #{@score.more_vs_fewer}."
       ]
       expect(@score.congratulate_player(average_guesses, average_time)).to eq(expected)
@@ -93,7 +80,7 @@ RSpec.describe Score do
       @score.update_grammar(average_guesses, average_time)
 
       expected = [
-        "\n#{@score.player_name}, you guessed the sequence '#{@score.winning_sequence}' in #{@guess_counter} guesses over #{@score.convert_time(@score.elapsed_time)}.",
+        "\n#{@score.player_name}, you guessed the sequence '#{@score.winning_sequence}' in #{@guess_counter} #{@score.singular_vs_plural} over #{@score.convert_time(@score.elapsed_time)}.",
         "That's #{@score.convert_time((@score.elapsed_time - average_time).abs)} #{@score.faster_vs_slower} and #{(@guess_counter - average_guesses).abs} guesses #{@score.more_vs_fewer}."
       ]
       expect(@score.congratulate_player(average_guesses, average_time)).to eq(expected)

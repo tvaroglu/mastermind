@@ -87,6 +87,9 @@ class Game
   def collect_high_score
     puts "Congratulations! You've guessed the sequence! What's your name?\n >"
     user_name = $stdin.gets.chomp
+    if user_name == ''
+      user_name = 'Player'
+    end
     score = Score.new(
       user_name, @difficulty_level, @winning_sequence, @guess_counter, timer)
     score.write_scores
@@ -95,8 +98,8 @@ class Game
 
   def end_game
     print_victory
-    user_selection = $stdin.gets.chomp
-    if user_selection.downcase[0] == 'p' || user_selection.downcase == ''
+    user_selection = $stdin.gets.chomp.downcase
+    if user_selection[0] == 'p' || user_selection == ''
       reset_guesses
       start
     else
@@ -123,15 +126,15 @@ class Game
 
   def start
     puts print_welcome
-    user_selection = $stdin.gets.chomp
-    if user_selection.downcase[0] == 'p'
+    user_selection = $stdin.gets.chomp.downcase
+    if user_selection[0] == 'p'
       select_difficulty
       puts print_start
       user_guess = $stdin.gets.chomp
       run(Guess.new((Combo.new(@difficulty_level).mixer), user_guess))
-    elsif user_selection.downcase[0] == 'i'
+    elsif user_selection[0] == 'i'
       print_instructions
-    elsif user_selection.downcase[0] == 'q'
+    elsif user_selection[0] == 'q'
       puts "Game exiting... \n Goodbye!"
     else
       start
@@ -158,6 +161,5 @@ class Game
       end_game
     end
   end
-
 
 end

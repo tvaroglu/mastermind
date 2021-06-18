@@ -2,6 +2,7 @@ require 'rspec'
 require_relative 'spec_helper'
 
 RSpec.describe Score do
+
   before :each do
     @player_name = 'admin'
     @difficulty_level = :b
@@ -11,6 +12,7 @@ RSpec.describe Score do
 
     @score = Score.new(
       @player_name, @difficulty_level, @winning_sequence, @guess_counter, @elapsed_time)
+    @score.instance_variable_set(:@file_path, './notes/scores.json')
   end
 
   it 'initializes' do
@@ -22,7 +24,7 @@ RSpec.describe Score do
     expect(@score.guess_counter).to eq(12)
     expect(@score.elapsed_time).to eq(150)
 
-    expect(@score.file_path).to eq('./lib/scores.json')
+    expect(@score.file_path).to eq('./notes/scores.json')
     expect(@score.faster_vs_slower).to eq('faster than the average')
     expect(@score.more_vs_fewer).to eq('fewer than the average')
 
@@ -104,6 +106,118 @@ RSpec.describe Score do
     @score.instance_variable_set(:@total_guesses, 13)
 
     expect(@score.print_top_10_scores).to eq(@score.top_10)
+  end
+
+  context 'writing scores' do
+    after :each do
+      @player_name = 'morpheus'
+
+      @writer = File.open('./notes/scores.json', 'r+')
+      @json_blob = JSON.parse(@writer.read)
+      @json_blob.delete(@player_name.capitalize)
+      File.write(@writer, JSON.pretty_generate(@json_blob))
+      @writer.close
+
+      expect(@json_blob.keys.length).to eq(3)
+    end
+
+    it 'for an existing player on an existing difficulty level' do
+      player_name = 'morpheus'
+      difficulty_level = :b
+
+      score = Score.new(
+        player_name, difficulty_level, 'yyrb', 15, '3 minute(s) 45 second(s)')
+      score.instance_variable_set(:@file_path, './notes/scores.json')
+      expect(score.retrieve_scores.keys.length).to eq(3)
+
+      score.write_scores
+      expect(score.retrieve_scores.keys.length).to eq(4)
+      expect(score.retrieve_scores[player_name.capitalize].keys.length).to eq(1)
+
+      most_recent = score.retrieve_scores[player_name.capitalize][difficulty_level.to_s]['most_recent_game']
+      expect(most_recent.class).to eq(Hash)
+      expect(most_recent.keys.length).to eq(3)
+      expect(most_recent.values.length).to eq(3)
+      expect(most_recent['winning_sequence']).to eq(score.winning_sequence)
+      expect(most_recent['num_guesses']).to eq(score.guess_counter)
+      expect(most_recent['elapsed_time_in_seconds']).to eq(score.elapsed_time)
+
+      all_games = score.retrieve_scores[player_name.capitalize][difficulty_level.to_s]['all_games_played']
+      expect(all_games.class).to eq(Array)
+      expect(all_games.length).to eq(1)
+      expect(all_games.first.class).to eq(Hash)
+      expect(all_games.first.keys.length).to eq(3)
+      expect(all_games.first.values.length).to eq(3)
+      expect(all_games.first['winning_sequence']).to eq(score.winning_sequence)
+      expect(all_games.first['num_guesses']).to eq(score.guess_counter)
+      expect(all_games.first['elapsed_time_in_seconds']).to eq(score.elapsed_time)
+
+      score = Score.new(
+        player_name, difficulty_level, 'bbgr', 8, '2 minute(s) 37 second(s)')
+      score.instance_variable_set(:@file_path, './notes/scores.json')
+      expect(score.retrieve_scores.keys.length).to eq(4)
+      expect(score.retrieve_scores[player_name.capitalize].keys.length).to eq(1)
+
+      score.write_scores
+      expect(score.retrieve_scores.keys.length).to eq(4)
+      expect(score.retrieve_scores[player_name.capitalize].keys.length).to eq(1)
+
+      most_recent = score.retrieve_scores[player_name.capitalize][difficulty_level.to_s]['most_recent_game']
+      expect(most_recent.class).to eq(Hash)
+      expect(most_recent.keys.length).to eq(3)
+      expect(most_recent.values.length).to eq(3)
+      expect(most_recent['winning_sequence']).to eq(score.winning_sequence)
+      expect(most_recent['num_guesses']).to eq(score.guess_counter)
+      expect(most_recent['elapsed_time_in_seconds']).to eq(score.elapsed_time)
+
+      all_games = score.retrieve_scores[player_name.capitalize][difficulty_level.to_s]['all_games_played']
+      expect(all_games.class).to eq(Array)
+      expect(all_games.length).to eq(2)
+      expect(all_games.last.class).to eq(Hash)
+      expect(all_games.last.keys.length).to eq(3)
+      expect(all_games.last.values.length).to eq(3)
+      expect(all_games.last['winning_sequence']).to eq(score.winning_sequence)
+      expect(all_games.last['num_guesses']).to eq(score.guess_counter)
+      expect(all_games.last['elapsed_time_in_seconds']).to eq(score.elapsed_time)
+    end
+
+    it 'for an existing player on a new difficulty level' do
+      player_name = 'morpheus'
+
+      score = Score.new(
+        player_name, :b, 'yyrb', 15, '3 minute(s) 45 second(s)')
+      score.instance_variable_set(:@file_path, './notes/scores.json')
+      expect(score.retrieve_scores.keys.length).to eq(3)
+
+      score.write_scores
+      expect(score.retrieve_scores.keys.length).to eq(4)
+      expect(score.retrieve_scores[player_name.capitalize].keys.length).to eq(1)
+
+      score = Score.new(
+        player_name, :i, 'yypbrb', 27, '5 minute(s) 12 second(s)')
+      score.instance_variable_set(:@file_path, './notes/scores.json')
+
+      score.write_scores
+      expect(score.retrieve_scores.keys.length).to eq(4)
+      expect(score.retrieve_scores[player_name.capitalize].keys.length).to eq(2)
+    end
+
+    it 'for a brand new player' do
+      player_name = 'morpheus'
+      difficulty_level = :b
+      winning_sequence = 'yyrb'
+      guess_counter = 15
+      elapsed_time = '3 minute(s) 45 second(s)'
+
+      score = Score.new(
+        player_name, difficulty_level, winning_sequence, guess_counter, elapsed_time)
+      score.instance_variable_set(:@file_path, './notes/scores.json')
+
+      expect(score.retrieve_scores.keys.length).to eq(3)
+
+      score.write_scores
+      expect(score.retrieve_scores.keys.length).to eq(4)
+    end
   end
 
 end

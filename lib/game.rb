@@ -85,7 +85,7 @@ class Game
   end
 
   def collect_high_score
-    puts "Congratulations! You've guessed the sequence! What's your name?\n >"
+    puts "What's your name?\n >"
     user_name = $stdin.gets.chomp
     if user_name == ''
       user_name = 'Player'

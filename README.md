@@ -1,4 +1,4 @@
-# ConnectFour
+# Mastermind
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Issues][issues-shield]][issues-url]
@@ -19,7 +19,7 @@
 ------
 
 ### <ins>Overview</ins>
-<img src="https://user-images.githubusercontent.com/58891447/141860830-780cd2a5-0c87-434d-893c-c44bc3673cbd.jpeg" width=50%/>  
+<img src="https://user-images.githubusercontent.com/58891447/144669847-3f7a5fce-b837-4b49-bcaf-bfd7bed6897c.jpg" width=50%/>  
 
 Feeling up for a challenge? How about a quick game of **Mastermind** for a little break in your day!
 </br>

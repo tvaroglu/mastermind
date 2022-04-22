@@ -57,7 +57,7 @@ This project requires Ruby 2.7.2.
 
 * Fork and/or clone this repository
 * Install gems:
-    * `$ bundle && bundle update
+    * `$ bundle && bundle update`
 * Run the test suite with `$ rspec -fd`
 * Run the game with `$ ruby mastermind.rb`
 
